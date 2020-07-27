@@ -1,7 +1,8 @@
 import React, {useState} from 'react' ;
 import FormInput from '../FormInput';
 import CustomButton from '../CustomButton';
-import {signInWithGoogle, signInWithRedirect} from '../../firebase/firebase.utils';
+import {signInWithGoogle} from '../../firebase/firebase.utils';
+
 
 const SignIn = () => {
 
@@ -14,6 +15,7 @@ const SignIn = () => {
         setPassword('');
     }
 
+   
     return(
         <div className = 'sign-in'>
             <h1>{email}</h1>

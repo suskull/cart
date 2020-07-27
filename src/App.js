@@ -13,26 +13,26 @@ import {Route, Link, Switch} from 'react-router-dom';
 
 
 
-const Topic = props => {
+// const Topic = props => {
   
-  return (
-    <div> This is page 
-      <Link to ={`${props.match.url}/13`}> To page 13 </Link>
-      <Link to ={`${props.match.url}/14`}> To page 14 </Link>
-      <button onClick = {() => props.history.push(props.match.url + '/16') } >To page 15</button>
-    </div>
-  )
-}
+//   return (
+//     <div> This is page 
+//       <Link to ={`${props.match.url}/13`}> To page 13 </Link>
+//       <Link to ={`${props.match.url}/14`}> To page 14 </Link>
+//       <button onClick = {() => props.history.push(props.match.url + '/16') } >To page 15</button>
+//     </div>
+//   )
+// }
 
-const TopicDetail = props => {
+// const TopicDetail = props => {
  
-  return (
-    <div> 
-      This is page :{props.match.params.topicId} 
-      <button onClick = {() => props.history.push(props.match.url.replace(('/'+ props.match.params.topicId), '')) } >To Topic</button>
-    </div>
-  )
-}
+//   return (
+//     <div> 
+//       This is page :{props.match.params.topicId} 
+//       <button onClick = {() => props.history.push(props.match.url.replace(('/'+ props.match.params.topicId), '')) } >To Topic</button>
+//     </div>
+//   )
+// }
 
 
 class App extends React.Component {
@@ -51,7 +51,7 @@ class App extends React.Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
       this.setState({ currentUser: user });
 
-      console.log(user);
+      //console.log(user);
     });
   }
 
@@ -63,12 +63,12 @@ class App extends React.Component {
   render() {
   return (
     <div className='App'>
-      <Header />
+      <Header currentUser ={this.state.currentUser}/>
       <Switch >
         <Route exact path='/' component={HomePage} />
         <Route path ='/shop' component={Shop}/>
-        <Route exact path ='/topic/' component ={Topic}/>
-        <Route path = '/topic/:topicId' component={TopicDetail}/>
+        {/* <Route exact path ='/topic/' component ={Topic}/>
+        <Route path = '/topic/:topicId' component={TopicDetail}/> */}
         <Route path = '/signin' component={SignInAndSignUp}/>
       </Switch>
     
