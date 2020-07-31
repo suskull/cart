@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import Shop from './pages/Shop';
 import Header from './components/Header';
 import SignInAndSignUp from './pages/SignInAndSignUp';
-import {auth,createUserProfileDocument} from './firebase/firebase.utils';
+import {auth,createUserProfileDocument, addCollectionAndDocuments} from './firebase/firebase.utils';
 
 
 import './App.css';
@@ -15,30 +15,12 @@ import {setCurrentUser} from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import CheckOut from './components/CheckOut';
 
-
-
-
-// const Topic = props => {
-  
-//   return (
-//     <div> This is page 
-//       <Link to ={`${props.match.url}/13`}> To page 13 </Link>
-//       <Link to ={`${props.match.url}/14`}> To page 14 </Link>
-//       <button onClick = {() => props.history.push(props.match.url + '/16') } >To page 15</button>
-//     </div>
-//   )
-// }
-
-// const TopicDetail = props => {
- 
-//   return (
-//     <div> 
-//       This is page :{props.match.params.topicId} 
-//       <button onClick = {() => props.history.push(props.match.url.replace(('/'+ props.match.params.topicId), '')) } >To Topic</button>
-//     </div>
-//   )
-// }
-
+// import data from shop.data.js to firebase 
+// khong xoa di se import nhieu lan
+// import {addCollectionAndDocuments} from './firebase/firebase.utils';
+// import { selectCollectionsForPreview } from './redux/shop/shop-selectors';
+// mapstatetopprops collectionsArray: selectCollectionsForPreview(state)
+// cho vao componentdidmount addCollectionAndDocuments('collections' ,collectionsArray.map(({title,items})=>({title,items})));
 
 class App extends React.Component {
 
@@ -46,7 +28,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const {setCurrentUser,collectionsArray} = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
      
       if(userAuth) {
@@ -61,6 +43,7 @@ class App extends React.Component {
       }
       else {
         setCurrentUser(userAuth);
+        
       }
   
       //console.log(user);
@@ -92,6 +75,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: selectCurrentUser(state)
+ 
 })
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))

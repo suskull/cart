@@ -13,14 +13,15 @@ const config = {
     measurementId: "G-X3QHW22WLQ"
 }
 
-
+// create data to firebase
 export const createUserProfileDocument = async (userAuth, addionalData) => {
     if(!userAuth) return;
-
+    // create ref
     const userRef = firestore.doc(`user/${userAuth.uid}`);
 
     const snapShot = await userRef.get();
 
+    //check if ref is exist then create additional data
     if(!snapShot.exists) {
         const {displayName, email} = userAuth;
         const createdAt = new Date();
@@ -40,6 +41,41 @@ export const createUserProfileDocument = async (userAuth, addionalData) => {
     }
 
     return userRef;
+}
+
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    
+    const batch = firestore.batch();
+    objectsToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc();
+        batch.set(newDocRef,obj)
+    });
+
+    return await batch.commit();
+
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+    const transformedCollection = collections.docs.map(doc => {
+        const {title, items} = doc.data();
+
+        return {
+            id:doc.id,
+            routeName: encodeURI(title),
+            title,
+            items
+        }
+    })
+
+    return transformedCollection.reduce((accumulator, collection)=>{
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    },{})
+
+
+    
 }
 
 firebase.initializeApp(config);

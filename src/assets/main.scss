@@ -3,6 +3,7 @@
 @import 'pages/hompage';
 @import 'pages/shop';
 @import 'pages/signin-and-signup';
+@import 'pages/collection';
 
 
 
@@ -22,3 +23,5 @@
 @import 'components/cart-item';
 @import 'components/checkout';
 @import 'components/checkout-item';
+@import 'components/collection-overview';
+@import 'components/with-spinner';
