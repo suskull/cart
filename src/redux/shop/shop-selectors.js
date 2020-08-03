@@ -26,5 +26,15 @@ export const selectCollection = collectionId =>
     createSelector(
         [selectShopCollections],
         collections => (collections ? collections[collectionId] : null)
-    )
+)
 
+
+export const selectCollectionFetching = createSelector(
+    [selectShop],
+    shop=>shop.isFetching
+)
+
+export const selectCollectionLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)
