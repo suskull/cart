@@ -19,18 +19,18 @@ import {
 
 const Header = ({ currentUser, hidden, signOutStart }) => (
   <HeaderContainer>
-    <LogoContainer to='/'>
+    <LogoContainer to='/' onDoubleClick={()=>window.location.reload(false)}>
       <Logo className='logo' />
     </LogoContainer>
     <OptionsContainer>
-      <OptionLink to='/shop'>SHOP</OptionLink>
-      <OptionLink to='/shop'>CONTACT</OptionLink>
+      <OptionLink to='/shop' onDoubleClick={()=>window.location.reload(false)}>SHOP</OptionLink>
+      <OptionLink to='/shop' onDoubleClick={()=>window.location.reload(false)}>CONTACT</OptionLink>
       {currentUser ? (
         <OptionLink as='div' onClick={signOutStart}>
           SIGN OUT
         </OptionLink>
       ) : (
-        <OptionLink to='/signin'>SIGN IN</OptionLink>
+        <OptionLink to='/signin' onDoubleClick={()=>window.location.reload(false)}>SIGN IN</OptionLink>
       )}
       <CartIcon />
     </OptionsContainer>
